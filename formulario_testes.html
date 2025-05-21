@@ -2,77 +2,117 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Prática de Testes de Software</title>
+  <title>Formulários de Testes de Software</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 40px auto;
-      max-width: 800px;
+      margin: 20px;
       line-height: 1.6;
     }
-    h1, h2 {
-      color: #2a4d69;
+    fieldset {
+      margin-bottom: 30px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
     }
+    legend {
+      font-weight: bold;
+    }
+    label {
+      display: block;
+      margin: 8px 0 4px;
+    }
+    input[type="text"],
     textarea {
       width: 100%;
-      height: 100px;
-      padding: 10px;
-      font-size: 14px;
-      margin-bottom: 20px;
-      resize: vertical;
+      max-width: 600px;
+      padding: 6px;
+      font-size: 1em;
     }
-    button {
-      padding: 12px 24px;
-      font-size: 16px;
-      background-color: #2a4d69;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #1e364d;
-    }
-    .section {
-      margin-bottom: 40px;
+    .submit-btn {
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
 
-  <h1>🧪 Prática Individual – Tipos de Teste de Software</h1>
-  <p>Preencha cada campo abaixo de acordo com o tipo de teste indicado. Você está testando um sistema fictício chamado <strong>MeuApp</strong>.</p>
+  <h1>Formulários de Testes de Software</h1>
 
-  <div class="section">
-    <h2>1. Teste de Integração</h2>
-    <p>Descreva um fluxo entre duas funcionalidades conectadas (ex: cadastro + login) e um possível ponto de falha.</p>
-    <textarea placeholder="Escreva sua resposta aqui..."></textarea>
-  </div>
+  <!-- Teste Alpha -->
+  <form id="alpha-test" action="#" method="post">
+    <fieldset>
+      <legend>Teste Alpha</legend>
+      <p>Explique brevemente o que é um Teste Alpha e qual seu principal objetivo.</p>
+      <label for="alpha-response">Resposta:</label>
+      <textarea id="alpha-response" name="alpha_response" rows="4" required></textarea>
+      <button class="submit-btn" type="submit">Enviar Teste Alpha</button>
+    </fieldset>
+  </form>
 
-  <div class="section">
-    <h2>2. Teste de Regressão</h2>
-    <p>Imagine que o sistema foi atualizado. Quais funcionalidades antigas você testaria de novo para garantir que ainda funcionam?</p>
-    <textarea placeholder="Escreva sua resposta aqui..."></textarea>
-  </div>
+  <!-- Teste Beta -->
+  <form id="beta-test" action="#" method="post">
+    <fieldset>
+      <legend>Teste Beta</legend>
+      <p>Marque a alternativa que melhor descreve o Teste Beta:</p>
+      <label>
+        <input type="radio" name="beta_option" value="a" required>
+        a) Teste realizado somente por desenvolvedores, em ambiente de desenvolvimento.
+      </label>
+      <label>
+        <input type="radio" name="beta_option" value="b">
+        b) Teste executado por usuários finais, em ambiente de produção ou similar.
+      </label>
+      <label>
+        <input type="radio" name="beta_option" value="c">
+        c) Teste automatizado focado em performance.
+      </label>
+      <button class="submit-btn" type="submit">Enviar Teste Beta</button>
+    </fieldset>
+  </form>
 
-  <div class="section">
-    <h2>3. Teste de Aceitação</h2>
-    <p>Escreva dois critérios de aceitação do ponto de vista do cliente, e diga como você verificaria se o sistema os atende.</p>
-    <textarea placeholder="Escreva sua resposta aqui..."></textarea>
-  </div>
+  <!-- Teste de Integração -->
+  <form id="integration-test" action="#" method="post">
+    <fieldset>
+      <legend>Teste de Integração</legend>
+      <p>Selecione os cenários que envolvem Teste de Integração:</p>
+      <label>
+        <input type="checkbox" name="integration_scenarios" value="api_db">
+        Comunicação entre API e banco de dados
+      </label>
+      <label>
+        <input type="checkbox" name="integration_scenarios" value="ui_backend">
+        Fluxo completo da UI até o backend
+      </label>
+      <label>
+        <input type="checkbox" name="integration_scenarios" value="unit_function">
+        Teste de funções isoladas (unitário)
+      </label>
+      <button class="submit-btn" type="submit">Enviar Teste de Integração</button>
+    </fieldset>
+  </form>
 
-  <div class="section">
-    <h2>4. Teste Alpha</h2>
-    <p>Simule um teste interno. Quais falhas ou comportamentos estranhos você encontrou testando como parte da equipe?</p>
-    <textarea placeholder="Escreva sua resposta aqui..."></textarea>
-  </div>
+  <!-- Teste de Regressão -->
+  <form id="regression-test" action="#" method="post">
+    <fieldset>
+      <legend>Teste de Regressão</legend>
+      <p>Descreva como você automa­tizaria um teste de regressão para verificar funcionalidades antigas antes de cada lançamento.</p>
+      <label for="regression-response">Resposta:</label>
+      <textarea id="regression-response" name="regression_response" rows="4" required></textarea>
+      <button class="submit-btn" type="submit">Enviar Teste de Regressão</button>
+    </fieldset>
+  </form>
 
-  <div class="section">
-    <h2>5. Teste Beta</h2>
-    <p>Imagine que você é um usuário externo. Liste duas dificuldades ou sugestões de melhoria com base na sua experiência.</p>
-    <textarea placeholder="Escreva sua resposta aqui..."></textarea>
-  </div>
-
-  <button onclick="alert('Simulação concluída! Suas respostas foram preenchidas.')">Enviar Respostas</button>
+  <!-- Teste de Aceitação -->
+  <form id="acceptance-test" action="#" method="post">
+    <fieldset>
+      <legend>Teste de Aceitação</legend>
+      <p>Complete a frase:</p>
+      <label for="acceptance-complete">
+        O Teste de Aceitação é realizado pelo <input type="text" id="acceptance-complete" name="acceptance_actor" required> para validar se o software atende aos requisitos do cliente.
+      </label>
+      <button class="submit-btn" type="submit">Enviar Teste de Aceitação</button>
+    </fieldset>
+  </form>
 
 </body>
 </html>
