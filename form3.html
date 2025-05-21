@@ -1,0 +1,33 @@
+<!--
+  Formulários de Testes de Sistema
+  Exercício para que os alunos pratiquem:
+  - Validação de campos obrigatórios
+  - Testes de boundary e formatos
+  - Submissão e resiliência
+-->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulários de Testes de Sistema</title>
+</head>
+<body>
+  <h1>Exercícios de Testes de Sistema</h1>
+
+  <!-- Formulário 3: Upload de Documento -->
+  <section>
+    <h2>3. Upload de Documento</h2>
+    <form id="upload-doc" action="#" method="post" enctype="multipart/form-data">
+      <label for="doc">Selecione um arquivo PDF (máx. 2MB):</label><br>
+      <input type="file" id="doc" name="doc" accept="application/pdf" required><br><br>
+
+      <label for="descricao-doc">Descrição:</label><br>
+      <input type="text" id="descricao-doc" name="descricao-doc" maxlength="100"><br><br>
+
+      <button type="submit">Upload</button>
+    </form>
+  </section>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!--
+  Formulários de Testes de Sistema
+  Exercício para que os alunos pratiquem:
+  - Validação de campos obrigatórios
+  - Testes de boundary e formatos
+  - Submissão e resiliência
+-->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulários de Testes de Sistema</title>
+</head>
+<body>
+  <h1>Exercícios de Testes de Sistema</h1>
+
+  <!-- Formulário 2: Envio de Feedback -->
+  <section>
+    <h2>2. Envio de Feedback</h2>
+    <form id="feedback" action="#" method="post">
+      <label for="usuario-id">ID do usuário:</label><br>
+      <input type="text" id="usuario-id" name="usuario-id" pattern="[A-Z]{3}\d{4}" placeholder="EX: ABC1234" required><br><br>
+
+      <label for="satisfacao">Nível de satisfação:</label><br>
+      <select id="satisfacao" name="satisfacao" required>
+        <option value="">--Escolha--</option>
+        <option value="1">1 - Muito insatisfeito</option>
+        <option value="2">2 - Insatisfeito</option>
+        <option value="3">3 - Neutro</option>
+        <option value="4">4 - Satisfeito</option>
+        <option value="5">5 - Muito satisfeito</option>
+      </select><br><br>
+
+      <label for="comentario">Comentário (até 500 caracteres):</label><br>
+      <textarea id="comentario" name="comentario" rows="5" cols="50" maxlength="500"></textarea><br><br>
+
+      <button type="submit">Enviar Feedback</button>
+    </form>
+  </section>
+
+  <hr>
+
+
+</body>
+</html>

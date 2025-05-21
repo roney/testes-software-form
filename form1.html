@@ -1,0 +1,55 @@
+<!--
+  Formulários de Testes de Sistema
+  Exercício para que os alunos pratiquem:
+  - Validação de campos obrigatórios
+  - Testes de boundary e formatos
+  - Submissão e resiliência
+-->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulários de Testes de Sistema</title>
+</head>
+<body>
+  <h1>Exercícios de Testes de Sistema</h1>
+
+  <!-- Formulário 1: Cadastro de Usuário -->
+  <section>
+    <h2>1. Cadastro de Usuário</h2>
+    <form id="cadastro-usuario" action="#" method="post">
+      <label for="nome">Nome completo (obrigatório):</label><br>
+      <input type="text" id="nome" name="nome" required minlength="5" maxlength="100"><br><br>
+
+      <label for="email">E-mail (obrigatório):</label><br>
+      <input type="email" id="email" name="email" required><br><br>
+
+      <label for="senha">Senha (6-12 caracteres):</label><br>
+      <input type="password" id="senha" name="senha" required minlength="6" maxlength="12"><br><br>
+
+      <label for="idade">Idade (18-99):</label><br>
+      <input type="number" id="idade" name="idade" required min="18" max="99"><br><br>
+
+      <label>Gênero:</label><br>
+      <input type="radio" id="masc" name="genero" value="masculino" required>
+      <label for="masc">Masculino</label><br>
+      <input type="radio" id="fem" name="genero" value="feminino">
+      <label for="fem">Feminino</label><br>
+      <input type="radio" id="outro" name="genero" value="outro">
+      <label for="outro">Outro</label><br><br>
+
+      <label for="terminos">
+        <input type="checkbox" id="terminos" name="terminos" required>
+        Aceito os termos de uso
+      </label><br><br>
+
+      <button type="submit">Cadastrar</button>
+    </form>
+  </section>
+
+  <hr>
+
+
+</body>
+</html>
