@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Calculadora de Consumo de Energia</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
@@ -35,7 +35,7 @@
       border-radius: 12px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       padding: 24px;
-      width: 320px;
+      width: 340px;
       margin-bottom: 20px;
     }
 
@@ -69,6 +69,12 @@
       background: #003a8a;
     }
 
+    .secondary {
+      background: #ccc;
+      color: #000;
+      margin-top: 8px;
+    }
+
     .result {
       margin-top: 16px;
       background: #eef4ff;
@@ -84,6 +90,33 @@
       padding: 20px;
       width: 90%;
       max-width: 600px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f0f4ff;
+      margin: 5px 0;
+      padding: 6px 10px;
+      border-radius: 8px;
+    }
+
+    .remove-btn {
+      background: transparent;
+      border: none;
+      color: #c00;
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+
+    .remove-btn:hover {
+      color: #900;
     }
   </style>
 </head>
@@ -108,6 +141,7 @@
     <input type="number" id="price" value="0.80" step="0.01">
 
     <button onclick="adicionar()">Adicionar Dispositivo</button>
+    <button class="secondary" onclick="baixarGrafico()">📸 Baixar Gráfico (PNG)</button>
   </div>
 
   <div class="result" id="result">Nenhum dispositivo adicionado ainda.</div>
@@ -136,13 +170,32 @@
       dispositivos.push({ nome, energy_kwh, cost })
       atualizarResultado()
       atualizarGrafico()
+
+      // Limpar campos
+      document.getElementById("device").value = ""
+      document.getElementById("power").value = ""
+      document.getElementById("hours").value = ""
+      document.getElementById("days").value = ""
+    }
+
+    function remover(index) {
+      dispositivos.splice(index, 1)
+      atualizarResultado()
+      atualizarGrafico()
     }
 
     function atualizarResultado() {
-      let html = "<h3>📋 Dispositivos Cadastrados</h3>"
-      html += "<ul style='list-style:none;padding:0;'>"
-      dispositivos.forEach(d => {
-        html += `<li>💡 <strong>${d.nome}</strong> → ${d.energy_kwh.toFixed(2)} kWh | R$ ${d.cost.toFixed(2)}</li>`
+      if (dispositivos.length === 0) {
+        document.getElementById("result").innerHTML = "Nenhum dispositivo adicionado ainda."
+        return
+      }
+
+      let html = "<h3>📋 Dispositivos Cadastrados</h3><ul>"
+      dispositivos.forEach((d, i) => {
+        html += `<li>
+          💡 <strong>${d.nome}</strong> → ${d.energy_kwh.toFixed(2)} kWh | R$ ${d.cost.toFixed(2)}
+          <button class='remove-btn' onclick='remover(${i})'>✖</button>
+        </li>`
       })
       html += "</ul>"
       document.getElementById("result").innerHTML = html
@@ -150,7 +203,6 @@
 
     function atualizarGrafico() {
       const ctx = document.getElementById("grafico").getContext("2d")
-
       const labels = dispositivos.map(d => d.nome)
       const consumos = dispositivos.map(d => d.energy_kwh)
 
@@ -175,17 +227,25 @@
               display: true,
               text: "Comparativo de Consumo Elétrico"
             },
-            legend: {
-              display: false
-            }
+            legend: { display: false }
           },
           scales: {
-            y: {
-              beginAtZero: true
-            }
+            y: { beginAtZero: true }
           }
         }
       })
+    }
+
+    function baixarGrafico() {
+      if (!chart) {
+        alert("⚠️ Adicione ao menos um dispositivo antes de baixar o gráfico.")
+        return
+      }
+
+      const link = document.createElement("a")
+      link.download = "grafico_consumo.png"
+      link.href = chart.toBase64Image()
+      link.click()
     }
   </script>
 
