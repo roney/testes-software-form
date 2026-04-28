@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teste Caixa Preta - Descubra a Função</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 40px;
+      color: #222;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      margin-top: 0;
+      color: #1f4e79;
+    }
+
+    .box {
+      margin-top: 25px;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      background: #fafafa;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #bbb;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 12px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background: #1f4e79;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #163a59;
+    }
+
+    .saida {
+      margin-top: 20px;
+      padding: 15px;
+      background: #eef5ff;
+      border-left: 5px solid #1f4e79;
+      font-size: 18px;
+      min-height: 30px;
+    }
+
+    .historico {
+      margin-top: 20px;
+      padding-left: 20px;
+    }
+
+    .pergunta {
+      margin-top: 30px;
+      background: #fff8dc;
+      border-left: 5px solid #e0a800;
+      padding: 15px;
+      border-radius: 8px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 100px;
+      margin-top: 10px;
+      padding: 10px;
+      font-size: 15px;
+      border-radius: 8px;
+      border: 1px solid #bbb;
+      box-sizing: border-box;
+    }
+
+    .dica {
+      font-size: 14px;
+      color: #555;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🧪 Teste Caixa Preta</h1>
+    <p>
+      Digite diferentes números, observe a saída e tente descobrir qual regra a função está usando.
+      Você não deve olhar o código durante o exercício.
+    </p>
+
+    <div class="box">
+      <label for="entrada">Digite um número:</label>
+      <input type="number" id="entrada" placeholder="Ex: 2, 5, 10, -3..." />
+      <button onclick="executarTeste()">Testar</button>
+
+      <div class="saida" id="saida">A saída aparecerá aqui.</div>
+
+      <h3>Histórico de testes</h3>
+      <ul class="historico" id="historico"></ul>
+    </div>
+
+    <div class="pergunta">
+      <strong>Agora responda:</strong>
+      <p>Com base nos testes feitos, o que você acha que a função faz?</p>
+
+      <p class="dica">
+        Dica: teste números pares, ímpares, zero, negativos e valores grandes.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    function funcaoMisteriosa(n) {
+      if (n % 2 === 0) {
+        return n * 2;
+      } else {
+        return n + 1;
+      }
+    }
+
+    function executarTeste() {
+      const campoEntrada = document.getElementById('entrada');
+      const saida = document.getElementById('saida');
+      const historico = document.getElementById('historico');
+
+      const valor = Number(campoEntrada.value);
+
+      if (campoEntrada.value === '') {
+        saida.textContent = 'Digite um número antes de testar.';
+        return;
+      }
+
+      const resultado = funcaoMisteriosa(valor);
+      saida.textContent = 'Resultado: ' + resultado;
+
+      const item = document.createElement('li');
+      item.textContent = 'Entrada: ' + valor + ' → Saída: ' + resultado;
+      historico.appendChild(item);
+
+      campoEntrada.value = '';
+      campoEntrada.focus();
+    }
+  </script>
+</body>
+</html>

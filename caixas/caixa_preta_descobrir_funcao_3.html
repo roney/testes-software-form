@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Caixa Preta 3 - Descubra a Regra</title>
+<style>
+body{font-family:Arial;background:#f4f6f8;padding:40px}
+.container{max-width:700px;margin:auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 14px rgba(0,0,0,.1)}
+h1{color:#1f4e79}
+input,textarea{width:100%;padding:12px;margin-top:10px;border:1px solid #ccc;border-radius:8px;box-sizing:border-box}
+button{margin-top:15px;padding:12px 20px;background:#1f4e79;color:white;border:none;border-radius:8px;cursor:pointer}
+.saida{margin-top:20px;padding:15px;background:#eef5ff;border-left:5px solid #1f4e79}
+.pergunta{margin-top:30px;background:#fff8dc;padding:15px;border-left:5px solid #e0a800}
+</style>
+</head>
+<body>
+<div class='container'>
+<h1>🧪 Caixa Preta - Mistério #3</h1>
+<p>Faça vários testes e tente deduzir o comportamento.</p>
+
+<label>Digite um número:</label>
+<input id='entrada' type='number'>
+<button onclick='testar()'>Executar</button>
+
+<div id='saida' class='saida'>A saída aparecerá aqui</div>
+<ul id='historico'></ul>
+
+<div class='pergunta'>
+<strong>Hipótese:</strong>
+<p>O que essa função parece fazer?</p>
+<textarea></textarea>
+</div>
+</div>
+
+<script>
+function misterio(n){
+ if(n%3===0) return n/3;
+ return n+5;
+}
+
+function testar(){
+ let n=Number(document.getElementById('entrada').value)
+ let r=misterio(n)
+ document.getElementById('saida').innerText='Resultado: '+r
+ let li=document.createElement('li')
+ li.textContent=`Entrada ${n} → ${r}`
+ document.getElementById('historico').appendChild(li)
+}
+</script>
+</body>
+</html>

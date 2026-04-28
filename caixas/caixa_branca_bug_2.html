@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Caixa Branca - Bug 2</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 40px;
+      color: #222;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      color: #245c2a;
+      margin-top: 0;
+    }
+
+    .box {
+      margin-top: 25px;
+      padding: 20px;
+      background: #fafafa;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #bbb;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 12px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background: #245c2a;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1a421f;
+    }
+
+    .saida {
+      margin-top: 20px;
+      padding: 15px;
+      background: #efffed;
+      border-left: 5px solid #245c2a;
+      font-size: 18px;
+      min-height: 30px;
+    }
+
+    pre {
+      background: #1e1e1e;
+      color: #f8f8f2;
+      padding: 18px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 14px;
+    }
+
+    .pergunta {
+      margin-top: 25px;
+      background: #fff8dc;
+      border-left: 5px solid #e0a800;
+      padding: 15px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🧪 Caixa Branca - Bug Escondido #2</h1>
+    <p>
+      Analise o código, execute testes e descubra onde a função se comporta de forma incorreta.
+    </p>
+
+    <div class="box">
+      <h2>Código da função</h2>
+      <pre><code>function calcularFrete(valorCompra) {
+  if (valorCompra >= 100) {
+    return 0;
+  } else if (valorCompra > 0) {
+    return 15;
+  } else {
+    return 15;
+  }
+}</code></pre>
+    </div>
+
+    <div class="box">
+      <label for="valor">Digite o valor da compra:</label>
+      <input type="number" id="valor" placeholder="Ex: 0, 50, 99, 100..." />
+      <button onclick="testar()">Calcular frete</button>
+      <div class="saida" id="saida">A saída aparecerá aqui.</div>
+      <h3>Histórico</h3>
+      <ul id="historico"></ul>
+    </div>
+
+    <div class="pergunta">
+      <strong>Responda:</strong>
+      <p>1. Qual entrada revelou o bug?</p>
+      <p>2. Qual comportamento esperado não aconteceu?</p>
+      <p>3. Qual linha ou condição deveria ser corrigida?</p>
+      <textarea placeholder="Escreva sua análise aqui..."></textarea>
+    </div>
+  </div>
+
+  <script>
+    function calcularFrete(valorCompra) {
+      if (valorCompra >= 100) {
+        return 0;
+      } else if (valorCompra > 0) {
+        return 15;
+      } else {
+        return 15;
+      }
+    }
+
+    function testar() {
+      const campo = document.getElementById('valor');
+      const saida = document.getElementById('saida');
+      const historico = document.getElementById('historico');
+
+      if (campo.value === '') {
+        saida.textContent = 'Digite o valor da compra antes de testar.';
+        return;
+      }
+
+      const valor = Number(campo.value);
+      const resultado = calcularFrete(valor);
+      saida.textContent = 'Frete: R$ ' + resultado;
+
+      const item = document.createElement('li');
+      item.textContent = 'Entrada: R$ ' + valor + ' → Frete: R$ ' + resultado;
+      historico.appendChild(item);
+
+      campo.value = '';
+      campo.focus();
+    }
+  </script>
+</body>
+</html>
