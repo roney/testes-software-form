@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulário de Cadastro - Teste de Sistema</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f4f8;
+      margin: 0;
+      padding: 30px;
+    }
+
+    .container {
+      max-width: 750px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+    }
+
+    h1 {
+      margin-top: 0;
+      color: #1f4e79;
+    }
+
+    p {
+      color: #555;
+    }
+
+    label {
+      display: block;
+      margin-top: 16px;
+      font-weight: bold;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border: 1px solid #bbb;
+      border-radius: 6px;
+      font-size: 15px;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .linha {
+      display: flex;
+      gap: 15px;
+    }
+
+    .linha div {
+      flex: 1;
+    }
+
+    .checkbox-area {
+      margin-top: 18px;
+      background: #f8f8f8;
+      padding: 12px;
+      border-radius: 6px;
+    }
+
+    .checkbox-area label {
+      display: inline;
+      font-weight: normal;
+    }
+
+    .checkbox-area input {
+      width: auto;
+    }
+
+    button {
+      margin-top: 25px;
+      padding: 12px 20px;
+      background: #1f4e79;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #173b5c;
+    }
+
+    .mensagem {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 6px;
+      display: none;
+      font-weight: bold;
+    }
+
+    .sucesso {
+      background: #e6ffed;
+      color: #155724;
+      border: 1px solid #b7ebc6;
+    }
+
+    .erro {
+      background: #ffe6e6;
+      color: #8a1f1f;
+      border: 1px solid #f5b5b5;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Cadastro de Aluno</h1>
+    <p>Preencha os dados abaixo para realizar o cadastro no sistema acadêmico.</p>
+
+    <form id="formCadastro">
+      <label for="nome">Nome completo *</label>
+      <input type="text" id="nomeCompleto" placeholder="Digite seu nome completo">
+
+      <label for="email">E-mail *</label>
+      <input type="text" id="email" placeholder="exemplo@email.com">
+
+      <div class="linha">
+        <div>
+          <label for="idade">Idade *</label>
+          <input type="number" id="idade" placeholder="Ex: 18">
+        </div>
+        <div>
+          <label for="matricula">Matrícula *</label>
+          <input type="text" id="matricula" placeholder="Ex: 2024001">
+        </div>
+      </div>
+
+      <label for="curso">Curso *</label>
+      <select id="curso">
+        <option value="">Selecione um curso</option>
+        <option value="ads">Análise e Desenvolvimento de Sistemas</option>
+        <option value="redes">Redes de Computadores</option>
+        <option value="design">Design Digital</option>
+      </select>
+
+      <label for="turno">Turno *</label>
+      <select id="turno">
+        <option value="manha">Manhã</option>
+        <option value="tarde">Tarde</option>
+        <option value="noite">Noite</option>
+      </select>
+
+      <label for="senha">Senha *</label>
+      <input type="text" id="senha" placeholder="Mínimo 6 caracteres">
+
+      <label for="confirmarSenha">Confirmar senha *</label>
+      <input type="password" id="confirmarSenha" placeholder="Digite a senha novamente">
+
+      <label for="telefone">Telefone</label>
+      <input type="tel" id="telefone" placeholder="(85) 99999-9999">
+
+      <label for="dataNascimento">Data de nascimento *</label>
+      <input type="date" id="dataNascimento">
+
+      <label for="observacoes">Observações</label>
+      <textarea id="observacoes" placeholder="Escreva alguma observação, se desejar..."></textarea>
+
+      <div class="checkbox-area">
+        <input type="checkbox" id="termos">
+        <label for="termo">Aceito os termos de uso *</label>
+      </div>
+
+      <button type="submit">Cadastrar</button>
+    </form>
+
+    <div id="mensagem" class="mensagem"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById('formCadastro');
+    const mensagem = document.getElementById('mensagem');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const nome = document.getElementById('nomeCompleto').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const idade = Number(document.getElementById('idade').value);
+      const matricula = document.getElementById('matricula').value.trim();
+      const curso = document.getElementById('curso').value;
+      const turno = document.getElementById('turno').value;
+      const senha = document.getElementById('senha').value;
+      const confirmarSenha = document.getElementById('confirmarSenha').value;
+      const termos = document.getElementById('termos').checked;
+
+      mensagem.style.display = 'block';
+      mensagem.className = 'mensagem erro';
+
+      if (nome.length < 3) {
+        mensagem.textContent = 'Nome inválido.';
+        return;
+      }
+
+      if (!email.includes('@')) {
+        mensagem.textContent = 'E-mail inválido.';
+        return;
+      }
+
+      if (idade < 16) {
+        mensagem.textContent = 'Idade inválida.';
+        return;
+      }
+
+      if (matricula.length < 3) {
+        mensagem.textContent = 'Matrícula inválida.';
+        return;
+      }
+
+      if (curso === '') {
+        mensagem.textContent = 'Selecione um curso.';
+        return;
+      }
+
+      if (senha.length <= 6) {
+        mensagem.textContent = 'Senha inválida.';
+        return;
+      }
+
+      if (senha !== confirmarSenha) {
+        mensagem.textContent = 'Cadastro realizado com sucesso!';
+        mensagem.className = 'mensagem sucesso';
+        return;
+      }
+
+      if (!termos) {
+        mensagem.textContent = 'Cadastro realizado com sucesso!';
+        mensagem.className = 'mensagem sucesso';
+        return;
+      }
+
+      mensagem.textContent = 'Cadastro realizado com sucesso!';
+      mensagem.className = 'mensagem sucesso';
+    });
+  </script>
+</body>
+</html>
