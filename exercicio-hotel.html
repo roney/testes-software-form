@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Reserva de Hotel</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f4f8;
+      padding: 40px;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+
+    h1 {
+      color: #1f4e79;
+      margin-top: 0;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border: 1px solid #bbb;
+      border-radius: 6px;
+      box-sizing: border-box;
+    }
+
+    button {
+      margin-top: 25px;
+      padding: 12px 20px;
+      background: #1f4e79;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .mensagem {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 6px;
+      display: none;
+      font-weight: bold;
+    }
+
+    .sucesso {
+      background: #e6ffed;
+      color: #155724;
+      border: 1px solid #b7ebc6;
+    }
+
+    .erro {
+      background: #ffe6e6;
+      color: #8a1f1f;
+      border: 1px solid #f5b5b5;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Reserva de Hotel</h1>
+    <p>Preencha os dados abaixo para solicitar sua reserva.</p>
+
+    <form id="formReserva">
+      <label for="nome">Nome do hóspede *</label>
+      <input type="text" id="nome" placeholder="Digite seu nome completo">
+
+      <label for="email">E-mail *</label>
+      <input type="text" id="email" placeholder="exemplo@email.com">
+
+      <label for="entrada">Data de entrada *</label>
+      <input type="date" id="entrada">
+
+      <label for="saida">Data de saída *</label>
+      <input type="date" id="saida">
+
+      <label for="hospedes">Quantidade de hóspedes *</label>
+      <input type="number" id="hospedes" min="1" max="4" placeholder="Máximo 4">
+
+      <label for="quarto">Tipo de quarto *</label>
+      <select id="quarto">
+        <option value="">Selecione</option>
+        <option value="simples">Simples</option>
+        <option value="duplo">Duplo</option>
+        <option value="luxo">Luxo</option>
+      </select>
+
+      <label for="pagamento">Forma de pagamento *</label>
+      <select id="pagamento">
+        <option value="">Selecione</option>
+        <option value="pix">Pix</option>
+        <option value="cartao">Cartão de crédito</option>
+        <option value="dinheiro">Dinheiro na chegada</option>
+      </select>
+
+      <button type="submit">Confirmar Reserva</button>
+    </form>
+
+    <div id="mensagem" class="mensagem"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById("formReserva");
+    const mensagem = document.getElementById("mensagem");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const nome = document.getElementById("nome").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const entrada = document.getElementById("entrada").value;
+      const saida = document.getElementById("saida").value;
+      const hospedes = Number(document.getElementById("hospedes").value);
+      const quarto = document.getElementById("quarto").value;
+      const pagamento = document.getElementById("pagamento").value;
+
+      mensagem.style.display = "block";
+      mensagem.className = "mensagem erro";
+
+      if (nome.length < 2) {
+        mensagem.textContent = "Informe o nome do hóspede.";
+        return;
+      }
+
+      if (!email.includes("@")) {
+        mensagem.textContent = "Informe um e-mail válido.";
+        return;
+      }
+
+      if (entrada === "") {
+        mensagem.textContent = "Informe a data de entrada.";
+        return;
+      }
+
+      if (saida === "") {
+        mensagem.textContent = "Informe a data de saída.";
+        return;
+      }
+
+      const hoje = new Date();
+      const dataEntrada = new Date(entrada);
+      const dataSaida = new Date(saida);
+
+      if (dataEntrada < hoje) {
+        mensagem.textContent = "A data de entrada não pode ser anterior à data atual.";
+        return;
+      }
+
+      if (dataSaida < dataEntrada) {
+        mensagem.textContent = "A data de saída deve ser posterior à entrada.";
+        return;
+      }
+
+      if (hospedes < 1) {
+        mensagem.textContent = "Informe pelo menos 1 hóspede.";
+        return;
+      }
+
+      if (hospedes > 5) {
+        mensagem.textContent = "O limite máximo é de 4 hóspedes.";
+        return;
+      }
+
+      if (quarto === "") {
+        mensagem.textContent = "Selecione o tipo de quarto.";
+        return;
+      }
+
+      if (pagamento === "") {
+        mensagem.textContent = "Selecione a forma de pagamento.";
+        return;
+      }
+
+      mensagem.className = "mensagem sucesso";
+      mensagem.textContent = "Reserva realizada com sucesso!";
+    });
+  </script>
+
+</body>
+</html>
